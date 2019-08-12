@@ -1,6 +1,10 @@
-# Cellular-Segmentation
-Cellular Segmentation for 3D reconstruction of tomographic images using FFN by Google.
-# Flood-Filling Networks
+This repo is used to do cellular segmentation for 3D reconstruction of tomographic images using FFN by Google.
+Meanwhile, u can make a 3D visualization in your own browser based on WebGL.
+Thanks to google for the code, i put the reference link at bottom.
+
+# Part1: Cellular-Segmentation
+    
+## Flood-Filling Networks
 
 Flood-Filling Networks (FFNs) are a class of neural networks designed for
 instance segmentation of complex and large shapes, particularly in volume
@@ -11,9 +15,8 @@ For more details, see the related publications:
  * https://arxiv.org/abs/1611.00421
  * https://doi.org/10.1101/200675
 
-This is not an official Google product.
 
-# Installation
+## Installation
 
 No installation is required. To install the necessary dependencies, run:
 
@@ -21,10 +24,7 @@ No installation is required. To install the necessary dependencies, run:
   pip install -r requirements.txt
 ```
 
-The code has been tested on an Ubuntu 16.04.3 LTS system equipped with a
-Tesla P100 GPU.
-
-# Training
+## Training
 
 FFN networks can be trained with the `train.py` script, which expects a
 TFRecord file of coordinates at which to sample data from input volumes.
@@ -95,18 +95,12 @@ Once the coordinate files are ready, you can start training the FFN with:
     --image_stddev 33
 ```
 
-Note that both training and inference with the provided model are
-computationally expensive processes. We recommend a GPU-equipped machine
-for best results, particularly when using the FFN interactively in a Jupyter
-notebook. Training the FFN as configured above requires a GPU with 12 GB of RAM.
+Note that both training and inference with the provided model are computationally expensive processes. 
 You can reduce the batch size, model depth, `fov_size`, or number of features in
 the convolutional layers to reduce the memory usage.
 
-The training script is not configured for multi-GPU or distributed training.
-For instructions on how to set this up, see the documentation on
-[Distributed TensorFlow](https://www.tensorflow.org/deploy/distributed#replicated_training).
 
-# Inference
+## Inference
 
 We provide two examples of how to run inference with a trained FFN model.
 For a non-interactive setting, you can use the `run_inference.py` script:
@@ -123,13 +117,12 @@ the `results/fib25/training2` directory. Two files will be produced:
 contain a segmentation map and quantized probability maps, respectively.
 In Python, you can load the segmentation as follows:
 
-```python
-  from ffn.inference import storage
-  seg, _ = storage.load_segmentation('results/fib25/training2', (0, 0, 0))
+```
+jupyter load.ipynb
 ```
 
 We provide sample segmentation results in `results/fib25/sample-training2.npz`.
-For the training2 volume, segmentation takes ~7 min with a P100 GPU.
+
 
 For an interactive setting, check out `ffn_inference_demo.ipynb`. This Jupyter
 notebook shows how to segment a single object with an explicitly defined
@@ -139,36 +132,10 @@ Both examples are configured to use a 3d convstack FFN model trained on the
 `validation1` volume of the FIB-25 dataset from the FlyEM project at Janelia.
 
 
-
+# Part2: 3D-visualization
 Neuroglancer is a WebGL-based viewer for volumetric data.  It is capable of displaying arbitrary (non axis-aligned) cross-sectional views of volumetric data, as well as 3-D meshes and line-segment based models (skeletons).
-
-This is not an official Google product.
-
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Travis CI Build Status](https://travis-ci.org/google/neuroglancer.svg?branch=master)](https://travis-ci.org/google/neuroglancer)
-[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/2npw99gr2x7kh763/branch/master?svg=true)](https://ci.appveyor.com/project/jbms/neuroglancer/branch/master)
-
-# Examples
-
-A live demo is hosted at <https://neuroglancer-demo.appspot.com>.  (The prior link opens the viewer without any preloaded dataset.)  Use the viewer links below to open the viewer preloaded with an example dataset.
-
-The four-pane view consists of 3 orthogonal cross-sectional views as well as a 3-D view (with independent orientation) that displays 3-D models (if available) for the selected objects.  All four views maintain the same center position.  The orientation of the 3 cross-sectional views can also be adjusted, although they maintain a fixed orientation relative to each other.  (Try holding the shift key and either dragging with the left mouse button or pressing an arrow key.)
-
-- Kasthuri et al., 2014.  Mouse somatosensory cortex (6x6x30 cubic nanometer resolution). <a href="https://neuroglancer-demo.appspot.com/#!{'layers':{'original-image':{'type':'image'_'source':'precomputed://gs://neuroglancer-public-data/kasthuri2011/image'_'visible':false}_'corrected-image':{'type':'image'_'source':'precomputed://gs://neuroglancer-public-data/kasthuri2011/image_color_corrected'}_'ground_truth':{'type':'segmentation'_'source':'precomputed://gs://neuroglancer-public-data/kasthuri2011/ground_truth'_'selectedAlpha':0.63_'notSelectedAlpha':0.14_'segments':['3208'_'4901'_'13'_'4965'_'4651'_'2282'_'3189'_'3758'_'15'_'4027'_'3228'_'444'_'3207'_'3224'_'3710']}}_'navigation':{'pose':{'position':{'voxelSize':[6_6_30]_'voxelCoordinates':[5523.99072265625_8538.9384765625_1198.0423583984375]}}_'zoomFactor':22.573112129999547}_'perspectiveOrientation':[-0.004047565162181854_-0.9566211104393005_-0.2268827110528946_-0.1827099621295929]_'perspectiveZoom':340.35867907175077}" target="_blank">Open viewer.</a>
-
-  This dataset was copied from <https://neurodata.io/data/kasthuri15/> and is made available under the [Open Data Common Attribution License](http://opendatacommons.org/licenses/by/1.0/).  Paper: <a href="http://dx.doi.org/10.1016/j.cell.2015.06.054" target="_blank">Kasthuri, Narayanan, et al.  "Saturated reconstruction of a volume of neocortex." Cell 162.3 (2015): 648-661.</a>
   
-- Janelia FlyEM FIB-25.  7-column Drosophila medulla (8x8x8 cubic nanometer resolution).  <a href="https://neuroglancer-demo.appspot.com/#!{'layers':{'image':{'type':'image'_'source':'precomputed://gs://neuroglancer-public-data/flyem_fib-25/image'}_'ground-truth':{'type':'segmentation'_'source':'precomputed://gs://neuroglancer-public-data/flyem_fib-25/ground_truth'_'segments':['21894'_'22060'_'158571'_'24436'_'2515']}}_'navigation':{'pose':{'position':{'voxelSize':[8_8_8]_'voxelCoordinates':[2914.500732421875_3088.243408203125_4045]}}_'zoomFactor':30.09748283999932}_'perspectiveOrientation':[0.3143535554409027_0.8142156600952148_0.4843369424343109_-0.06040262430906296]_'perspectiveZoom':443.63404517712684_'showSlices':false}" target="_blank">Open viewer.</a>
-
-  This dataset was copied from <https://www.janelia.org/project-team/flyem/data-and-software-release>, and is made available under the [Open Data Common Attribution License](http://opendatacommons.org/licenses/by/1.0/).  Paper: <a href="http://dx.doi.org/10.1073/pnas.1509820112" target="_blank">Takemura, Shin-ya et al. "Synaptic Circuits and Their Variations within Different Columns in the Visual System of Drosophila."  Proceedings of the National Academy of Sciences of the United States of America 112.44 (2015): 13711-13716.</a>
-  
-- FAFB: A Complete Electron Microscopy Volume of the Brain of Adult Drosophila melanogaster. <a href="https://neuroglancer-demo.appspot.com/?#!%7B%22layers%22:%7B%22fafb_v14%22:%7B%22source%22:%22precomputed://gs://neuroglancer-fafb-data/fafb_v14/fafb_v14_orig%22%2C%22type%22:%22image%22%7D%2C%22fafb_v14_clahe%22:%7B%22source%22:%22precomputed://gs://neuroglancer-fafb-data/fafb_v14/fafb_v14_clahe%22%2C%22type%22:%22image%22%2C%22visible%22:false%7D%2C%22neuropil-regions-surface%22:%7B%22type%22:%22segmentation%22%2C%22mesh%22:%22precomputed://gs://neuroglancer-fafb-data/elmr-data/FAFBNP.surf/mesh%22%2C%22segments%22:%5B%221%22%2C%2210%22%2C%2211%22%2C%2212%22%2C%2213%22%2C%2214%22%2C%2215%22%2C%2216%22%2C%2217%22%2C%2218%22%2C%2219%22%2C%222%22%2C%2220%22%2C%2221%22%2C%2222%22%2C%2223%22%2C%2224%22%2C%2225%22%2C%2226%22%2C%2227%22%2C%2228%22%2C%2229%22%2C%223%22%2C%2230%22%2C%2231%22%2C%2232%22%2C%2233%22%2C%2234%22%2C%2235%22%2C%2236%22%2C%2237%22%2C%2238%22%2C%2239%22%2C%224%22%2C%2240%22%2C%2241%22%2C%2242%22%2C%2243%22%2C%2244%22%2C%2245%22%2C%2246%22%2C%2247%22%2C%2248%22%2C%2249%22%2C%225%22%2C%2250%22%2C%2251%22%2C%2252%22%2C%2253%22%2C%2254%22%2C%2255%22%2C%2256%22%2C%2257%22%2C%2258%22%2C%2259%22%2C%226%22%2C%2260%22%2C%2261%22%2C%2262%22%2C%2263%22%2C%2264%22%2C%2265%22%2C%2266%22%2C%2267%22%2C%2268%22%2C%2269%22%2C%227%22%2C%2270%22%2C%2271%22%2C%2272%22%2C%2273%22%2C%2274%22%2C%2275%22%2C%228%22%2C%229%22%5D%7D%2C%22neuropil-full-surface%22:%7B%22type%22:%22mesh%22%2C%22source%22:%22vtk://https://storage.googleapis.com/neuroglancer-fafb-data/elmr-data/FAFB.surf.vtk.gz%22%2C%22vertexAttributeSources%22:%5B%5D%2C%22shader%22:%22void%20main%28%29%20%7B%5Cn%20%20emitRGBA%28vec4%281.0%2C%200.0%2C%200.0%2C%200.5%29%29%3B%5Cn%7D%5Cn%22%2C%22visible%22:false%7D%7D%2C%22navigation%22:%7B%22pose%22:%7B%22position%22:%7B%22voxelSize%22:%5B4%2C4%2C40%5D%2C%22voxelCoordinates%22:%5B123943.625%2C73323.8828125%2C5234%5D%7D%7D%2C%22zoomFactor%22:1210.991144617663%7D%2C%22perspectiveOrientation%22:%5B-0.28037887811660767%2C-0.19049881398677826%2C-0.13574382662773132%2C-0.9309519529342651%5D%2C%22perspectiveZoom%22:21335.91710335963%2C%22layout%22:%22xy-3d%22%7D" target="_blank">Open viewer.</a>
-
-  This dataset was copied from <https://www.temca2data.org/>, and is made available under the [CC-BY-NC 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).  The surface meshes were copied from <https://jefferis.github.io/elmr/reference/FAFB.surf.html>.
-  
-  Paper: <a href="https://doi.org/10.1016/j.cell.2018.06.019" target="_blank">Zhihao Zheng et al. "A Complete Electron Microscopy Volume of the Brain of Adult Drosophila melanogaster" Cell 174.3 (2018): 730-743.</a>
-  
-# Supported data sources
+## Supported data sources
 
 Neuroglancer itself is purely a client-side program, but it depends on data being accessible via HTTP in a suitable format.  It is designed to easily support many different data sources, and there is existing support for the following data APIs/formats:
 
@@ -180,12 +147,12 @@ Neuroglancer itself is purely a client-side program, but it depends on data bein
 - [Python in-memory volumes](python/README.md) (with automatic mesh generation)
 - N5 <https://github.com/saalfeldlab/n5>
 
-# Supported browsers
+## Supported browsers
 
 - Chrome >= 51
 - Firefox >= 46
 
-# Keyboard and mouse bindings
+## Keyboard and mouse bindings
 
 For the complete set of bindings, see
 [src/neuroglancer/ui/default_input_event_bindings.ts](src/neuroglancer/default_input_event_bindings.ts),
@@ -199,7 +166,7 @@ or within Neuroglancer, press `h` or click on the button labeled `?` in the uppe
 
 - Hover over an image layer name to access the opacity slider and the text editor for modifying the [rendering code](src/neuroglancer/sliceview/image_layer_rendering.md).
 
-# Troubleshooting
+## Troubleshooting
 
 - Neuroglancer doesn't appear to load properly.
 
@@ -232,7 +199,7 @@ or within Neuroglancer, press `h` or click on the button labeled `?` in the uppe
     
     As a security measure, recent versions of Chrome and Firefox prohibit webpages hosted at `https://` URLs from issuing requests to `http://` URLs.  As a workaround, you can use a Neuroglancer client hosted at a `http://` URL, e.g. the demo client running at http://neuroglancer-demo.appspot.com, or one running on localhost.  Alternatively, you can start Chrome with the `--disable-web-security` flag, but that should be done only with extreme caution.  (Make sure to use a separate profile, and do not access any untrusted webpages when running with that flag enabled.)
     
-# Multi-threaded architecture
+## Multi-threaded architecture
 
 In order to maintain a responsive UI and data display even during rapid navigation, work is split between the main UI thread (referred to as the "frontend") and a separate WebWorker thread (referred to as the "backend").  This introduces some complexity due to the fact that current browsers:
  - do not support any form of *shared* memory or standard synchronization mechanism (although they do support relatively efficient *transfers* of typed arrays between threads);
@@ -240,7 +207,7 @@ In order to maintain a responsive UI and data display even during rapid navigati
 
 The "frontend" UI thread handles user actions and rendering, while the "backend" WebWorker thread handle all queuing, downloading, and preprocessing of data needed for rendering.
 
-# Documentation Index
+## Documentation Index
 
 - [Image Layer Rendering](src/neuroglancer/sliceview/image_layer_rendering.md)
 - [Cross-sectional view implementation architecture](src/neuroglancer/sliceview/README.md)
@@ -248,9 +215,13 @@ The "frontend" UI thread handles user actions and rendering, while the "backend"
 - [Data chunk management](src/neuroglancer/chunk_manager/)
 - [On-GPU hashing](src/neuroglancer/gpu_hash/)
 
-# Building
+## how to show 3D visualization locally
 
 node.js is required to build the viewer.
+
+```
+cd /nvm_nodejs
+```
 
 1. First install NVM (node version manager) per the instructions here:
 
@@ -287,18 +258,14 @@ node.js is required to build the viewer.
    
    `npm test -- --pattern='util/uint64'`
 
-6. See [package.json](package.json) for other commands available.
 
-# Creating a dependent project
+## Creating a dependent project
 
 See [examples/dependent-project](examples/dependent-project).
 
-# Discussion Group
 
-There is a Google Group/mailing list for discussion related to Neuroglancer:
-<https://groups.google.com/forum/#!forum/neuroglancer>.
 
-# Related Projects
+## Related Projects
 
 - [nyroglancer](https://github.com/funkey/nyroglancer) - Jupyter notebook extension for visualizing
   Numpy arrays with Neuroglancer.
@@ -313,17 +280,9 @@ There is a Google Group/mailing list for discussion related to Neuroglancer:
 
 
 
-# Acknowledgements
-Cross-browser Testing Platform Provided by [Sauce Labs](https://saucelabs.com)
 
-# License
 
-Copyright 2016 Google Inc.
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this software except in compliance with the License.
-You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>.
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+## Referennce
+1. https://github.com/google/ffn/  
+2. https://github.com/nvm-sh/nvm  
+3. https://github.com/google/neuroglancer  
