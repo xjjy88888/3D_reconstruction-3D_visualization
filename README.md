@@ -199,6 +199,82 @@ cd /nvm_nodejs
    For example,
    
    `npm test -- --pattern='util/uint64'`
+   
+6. To show 3D visualization locally, 
+   You need to open the botton({}) which is in your top right-hand corner.  
+   Then, you could paste in the following code.
+   Demo1:
+   
+```
+{
+  "layers": [
+    {
+      "source": "precomputed://gs://neuroglancer-public-data/kasthuri2011/image",
+      "type": "image",
+      "name": "original-image",
+      "visible": false
+    },
+    {
+      "source": "precomputed://gs://neuroglancer-public-data/kasthuri2011/image_color_corrected",
+      "type": "image",
+      "name": "corrected-image"
+    },
+    {
+      "source": "precomputed://gs://neuroglancer-public-data/kasthuri2011/ground_truth",
+      "type": "segmentation",
+      "selectedAlpha": 0.63,
+      "notSelectedAlpha": 0.14,
+      "segments": [
+        "13",
+        "15",
+        "2282",
+        "3189",
+        "3207",
+        "3208",
+        "3224",
+        "3228",
+        "3710",
+        "3758",
+        "4027",
+        "444",
+        "4651",
+        "4901",
+        "4965"
+      ],
+      "skeletonRendering": {
+        "mode2d": "lines_and_points",
+        "mode3d": "lines"
+      },
+      "name": "ground_truth"
+    }
+  ],
+  "navigation": {
+    "pose": {
+      "position": {
+        "voxelSize": [
+          6,
+          6,
+          30
+        ],
+        "voxelCoordinates": [
+          5523.99072265625,
+          8538.9384765625,
+          1198.0423583984375
+        ]
+      }
+    },
+    "zoomFactor": 22.573112129999547
+  },
+  "perspectiveOrientation": [
+    -0.0040475670248270035,
+    -0.9566215872764587,
+    -0.22688281536102295,
+    -0.18271005153656006
+  ],
+  "perspectiveZoom": 340.35867907175077,
+  "layout": "4panel"
+}
+```
 
 
 ## Creating a dependent project
