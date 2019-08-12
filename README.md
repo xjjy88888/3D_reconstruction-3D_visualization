@@ -200,10 +200,11 @@ cd /nvm_nodejs
    
    `npm test -- --pattern='util/uint64'`
    
-6. To show 3D visualization locally, 
-   You need to open the botton({}) which is in your top right-hand corner.  
-   Then, you could paste in the following code.
-   Demo1:
+6. To show 3D visualization locally,   
+   You need to open the botton({}) which is in your top right-hand corner.    
+   Then, you could paste in the following code.  
+   Demo1: Kasthuri et al., 2014. Mouse somatosensory cortex (6x6x30 cubic nanometer resolution)     
+   This dataset was copied from https://neurodata.io/data/kasthuri15/ and is made available under the Open Data Common Attribution License. Paper: Kasthuri, Narayanan, et al. "Saturated reconstruction of a volume of neocortex." Cell 162.3 (2015): 648-661.
    
 ```
 {
@@ -275,6 +276,201 @@ cd /nvm_nodejs
   "layout": "4panel"
 }
 ```
+ Demo2: Janelia FlyEM FIB-25. 7-column Drosophila medulla (8x8x8 cubic nanometer resolution)  
+   This dataset was copied from https://www.janelia.org/project-team/flyem/data-and-software-release, and is made available under the Open Data Common Attribution License. Paper: Takemura, Shin-ya et al. "Synaptic Circuits and Their Variations within Different Columns in the Visual System of Drosophila." Proceedings of the National Academy of Sciences of the United States of America 112.44 (2015): 13711-13716.
+```
+{
+  "layers": [
+    {
+      "source": "precomputed://gs://neuroglancer-public-data/flyem_fib-25/image",
+      "type": "image",
+      "name": "image"
+    },
+    {
+      "source": "precomputed://gs://neuroglancer-public-data/flyem_fib-25/ground_truth",
+      "type": "segmentation",
+      "segments": [
+        "158571",
+        "21894",
+        "22060",
+        "24436",
+        "2515"
+      ],
+      "skeletonRendering": {
+        "mode2d": "lines_and_points",
+        "mode3d": "lines"
+      },
+      "name": "ground-truth"
+    }
+  ],
+  "navigation": {
+    "pose": {
+      "position": {
+        "voxelSize": [
+          8,
+          8,
+          8
+        ],
+        "voxelCoordinates": [
+          2914.500732421875,
+          3088.243408203125,
+          4041
+        ]
+      }
+    },
+    "zoomFactor": 30.09748283999932
+  },
+  "perspectiveOrientation": [
+    0.17737820744514465,
+    0.8829324841499329,
+    0.14149528741836548,
+    -0.41103073954582214
+  ],
+  "perspectiveZoom": 443.63404517712684,
+  "showSlices": false,
+  "layout": "4panel"
+}
+```
+Demo3: FAFB: A Complete Electron Microscopy Volume of the Brain of Adult Drosophila melanogaster  
+This dataset was copied from https://www.temca2data.org/, and is made available under the CC-BY-NC 4.0 International License. The surface meshes were copied from https://jefferis.github.io/elmr/reference/FAFB.surf.html.
+
+```
+{
+  "layers": [
+    {
+      "source": "precomputed://gs://neuroglancer-fafb-data/fafb_v14/fafb_v14_orig",
+      "type": "image",
+      "name": "fafb_v14"
+    },
+    {
+      "source": "precomputed://gs://neuroglancer-fafb-data/fafb_v14/fafb_v14_clahe",
+      "type": "image",
+      "name": "fafb_v14_clahe",
+      "visible": false
+    },
+    {
+      "type": "segmentation",
+      "mesh": "precomputed://gs://neuroglancer-fafb-data/elmr-data/FAFBNP.surf/mesh",
+      "segments": [
+        "1",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "2",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "3",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "4",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49",
+        "5",
+        "50",
+        "51",
+        "52",
+        "53",
+        "54",
+        "55",
+        "56",
+        "57",
+        "58",
+        "59",
+        "6",
+        "60",
+        "61",
+        "62",
+        "63",
+        "64",
+        "65",
+        "66",
+        "67",
+        "68",
+        "69",
+        "7",
+        "70",
+        "71",
+        "72",
+        "73",
+        "74",
+        "75",
+        "8",
+        "9"
+      ],
+      "skeletonRendering": {
+        "mode2d": "lines_and_points",
+        "mode3d": "lines"
+      },
+      "name": "neuropil-regions-surface"
+    },
+    {
+      "type": "mesh",
+      "source": "vtk://https://storage.googleapis.com/neuroglancer-fafb-data/elmr-data/FAFB.surf.vtk.gz",
+      "vertexAttributeSources": [],
+      "shader": "void main() {\n  emitRGBA(vec4(1.0, 0.0, 0.0, 0.5));\n}\n",
+      "name": "neuropil-full-surface",
+      "visible": false
+    }
+  ],
+  "navigation": {
+    "pose": {
+      "position": {
+        "voxelSize": [
+          4,
+          4,
+          40
+        ],
+        "voxelCoordinates": [
+          123943.625,
+          73323.8828125,
+          5234
+        ]
+      }
+    },
+    "zoomFactor": 1210.991144617663
+  },
+  "perspectiveOrientation": [
+    -0.28037887811660767,
+    -0.19049881398677826,
+    -0.13574382662773132,
+    -0.9309519529342651
+  ],
+  "perspectiveZoom": 21335.91710335963,
+  "layout": "xy-3d"
+}
+```
+
 
 
 ## Creating a dependent project
