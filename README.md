@@ -132,6 +132,11 @@ Both examples are configured to use a 3d convstack FFN model trained on the
 
 # Part2: 3D-visualization
 Neuroglancer is a WebGL-based viewer for volumetric data.  It is capable of displaying arbitrary (non axis-aligned) cross-sectional views of volumetric data, as well as 3-D meshes and line-segment based models (skeletons).
+Firstly, u need to
+
+```
+cd /3D_visualization
+```
   
 ## Supported data sources
 
@@ -150,72 +155,11 @@ Neuroglancer itself is purely a client-side program, but it depends on data bein
 - Chrome >= 51
 - Firefox >= 46
 
-## Keyboard and mouse bindings
-
-For the complete set of bindings, see
-[src/neuroglancer/ui/default_input_event_bindings.ts](src/neuroglancer/default_input_event_bindings.ts),
-or within Neuroglancer, press `h` or click on the button labeled `?` in the upper right corner.
-
-- Click on a layer name to toggle its visibility.
-
-- Double-click on a layer name to edit its properties.
-
-- Hover over a segmentation layer name to see the current list of objects shown and to access the opacity sliders.
-
-- Hover over an image layer name to access the opacity slider and the text editor for modifying the [rendering code](src/neuroglancer/sliceview/image_layer_rendering.md).
-
-## Troubleshooting
-
-- Neuroglancer doesn't appear to load properly.
-
-  Neuroglancer requires WebGL (2.0) and the `EXT_color_buffer_float` extension.
-  
-  To troubleshoot, check the developer console, which is accessed by the keyboard shortcut `control-shift-i` in Firefox and Chrome.  If there is a message regarding failure to initialize WebGL, you can take the following steps:
-  
-  - Chrome
-  
-    Check `chrome://gpu` to see if your GPU is blacklisted.  There may be a flag you can enable to make it work.
-    
-  - Firefox
-
-    Check `about:support`.  There may be webgl-related properties in `about:config` that you can change to make it work.  Possible settings:
-    - `webgl.disable-fail-if-major-performance-caveat = true`
-    - `webgl.force-enabled = true`
-    - `webgl.msaa-force = true`
-    
-- Failure to access a data source.
-
-  As a security measure, browsers will in many prevent a webpage from accessing the true error code associated with a failed HTTP request.  It is therefore often necessary to check the developer tools to see the true cause of any HTTP request error.
-
-  There are several likely causes:
-  
-  - [Cross-origin resource sharing (CORS)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
-  
-    Neuroglancer relies on cross-origin requests to retrieve data from third-party servers.  As a security measure, if an appropriate `Access-Control-Allow-Origin` response header is not sent by the server, browsers prevent webpages from accessing any information about the response from a cross-origin request.  In order to make the data accessible to Neuroglancer, you may need to change the cross-origin request sharing (CORS) configuration of the HTTP server.
-  
-  - Accessing an `http://` resource from a Neuroglancer client hosted at an `https://` URL
-    
-    As a security measure, recent versions of Chrome and Firefox prohibit webpages hosted at `https://` URLs from issuing requests to `http://` URLs.  As a workaround, you can use a Neuroglancer client hosted at a `http://` URL, e.g. the demo client running at http://neuroglancer-demo.appspot.com, or one running on localhost.  Alternatively, you can start Chrome with the `--disable-web-security` flag, but that should be done only with extreme caution.  (Make sure to use a separate profile, and do not access any untrusted webpages when running with that flag enabled.)
-    
-## Multi-threaded architecture
-
-In order to maintain a responsive UI and data display even during rapid navigation, work is split between the main UI thread (referred to as the "frontend") and a separate WebWorker thread (referred to as the "backend").  This introduces some complexity due to the fact that current browsers:
- - do not support any form of *shared* memory or standard synchronization mechanism (although they do support relatively efficient *transfers* of typed arrays between threads);
- - require that all manipulation of the DOM and the WebGL context happens on the main UI thread.
-
-The "frontend" UI thread handles user actions and rendering, while the "backend" WebWorker thread handle all queuing, downloading, and preprocessing of data needed for rendering.
-
-## Documentation Index
-
-- [Image Layer Rendering](src/neuroglancer/sliceview/image_layer_rendering.md)
-- [Cross-sectional view implementation architecture](src/neuroglancer/sliceview/README.md)
-- [Compressed segmentation format](src/neuroglancer/sliceview/compressed_segmentation/README.md)
-- [Data chunk management](src/neuroglancer/chunk_manager/)
-- [On-GPU hashing](src/neuroglancer/gpu_hash/)
 
 ## how to show 3D visualization locally
 
 node.js is required to build the viewer.
+Firstly, u need to
 
 ```
 cd /nvm_nodejs
@@ -260,24 +204,6 @@ cd /nvm_nodejs
 ## Creating a dependent project
 
 See [examples/dependent-project](examples/dependent-project).
-
-
-
-## Related Projects
-
-- [nyroglancer](https://github.com/funkey/nyroglancer) - Jupyter notebook extension for visualizing
-  Numpy arrays with Neuroglancer.
-- [4Quant/neuroglancer-docker](https://github.com/4Quant/neuroglancer-docker) - Example setup for
-  Docker deployment of the [Neuroglancer Python integration](python/README.md).
-- [FZJ-INM1-BDA/neuroglancer-scripts](https://github.com/FZJ-INM1-BDA/neuroglancer-scripts) -
-  Scripts for converting the [BigBrain](https://bigbrain.loris.ca) dataset to the
-  Neuroglancer [precomputed data format](src/neuroglancer/datasource/precomputed), which may serve
-  as a useful example for converting other datasets.
-- [BigArrays.jl](https://github.com/seung-lab/BigArrays.jl) - Julia interface of neuroglancer precomputed data format.
-- [cloudvolume](https://github.com/seung-lab/cloud-volume) - Python interface of neuroglancer precomputed data format.
-
-
-
 
 
 ## Referennce
