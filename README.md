@@ -204,7 +204,6 @@ cd /nvm_nodejs
    You need to open the botton({}) which is in your top right-hand corner.    
    Then, you could paste in the following code.  
    Demo1: Kasthuri et al., 2014. Mouse somatosensory cortex (6x6x30 cubic nanometer resolution)     
-   This dataset was copied from https://neurodata.io/data/kasthuri15/ and is made available under the Open Data Common Attribution License. Paper: Kasthuri, Narayanan, et al. "Saturated reconstruction of a volume of neocortex." Cell 162.3 (2015): 648-661.
    
 ```
 {
@@ -276,8 +275,7 @@ cd /nvm_nodejs
   "layout": "4panel"
 }
 ```
- Demo2: Janelia FlyEM FIB-25. 7-column Drosophila medulla (8x8x8 cubic nanometer resolution)  
-   This dataset was copied from https://www.janelia.org/project-team/flyem/data-and-software-release, and is made available under the Open Data Common Attribution License. Paper: Takemura, Shin-ya et al. "Synaptic Circuits and Their Variations within Different Columns in the Visual System of Drosophila." Proceedings of the National Academy of Sciences of the United States of America 112.44 (2015): 13711-13716.
+   Demo2: Janelia FlyEM FIB-25. 7-column Drosophila medulla (8x8x8 cubic nanometer resolution)  
 ```
 {
   "layers": [
@@ -331,9 +329,7 @@ cd /nvm_nodejs
   "layout": "4panel"
 }
 ```
-Demo3: FAFB: A Complete Electron Microscopy Volume of the Brain of Adult Drosophila melanogaster  
-This dataset was copied from https://www.temca2data.org/, and is made available under the CC-BY-NC 4.0 International License. The surface meshes were copied from https://jefferis.github.io/elmr/reference/FAFB.surf.html.
-
+   Demo3: FAFB: A Complete Electron Microscopy Volume of the Brain of Adult Drosophila melanogaster  
 ```
 {
   "layers": [
@@ -448,7 +444,8 @@ This dataset was copied from https://www.temca2data.org/, and is made available 
       "position": {
         "voxelSize": [
           4,
-          4,
+          4,  This dataset was copied from https://www.janelia.org/project-team/flyem/data-and-software-release, and is made available under the Open Data Common Attribution License. 
+
           40
         ],
         "voxelCoordinates": [
@@ -482,3 +479,9 @@ See [examples/dependent-project](examples/dependent-project).
 1. https://github.com/google/ffn/  
 2. https://github.com/nvm-sh/nvm  
 3. https://github.com/google/neuroglancer  
+4. https://www.temca2data.org/
+5. https://jefferis.github.io/elmr/reference/FAFB.surf.html
+6. https://www.janelia.org/project-team/flyem/data-and-software-release
+7. https://neurodata.io/data/kasthuri15/
+8. Takemura, Shin-ya et al. "Synaptic Circuits and Their Variations within Different Columns in the Visual System of Drosophila." Proceedings of the National Academy of Sciences of the United States of America 112.44 (2015): 13711-13716.
+9.  Kasthuri, Narayanan, et al. "Saturated reconstruction of a volume of neocortex." Cell 162.3 (2015): 648-661.
