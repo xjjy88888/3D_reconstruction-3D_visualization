@@ -483,5 +483,7 @@ See [examples/dependent-project](examples/dependent-project).
 5. https://jefferis.github.io/elmr/reference/FAFB.surf.html
 6. https://www.janelia.org/project-team/flyem/data-and-software-release
 7. https://neurodata.io/data/kasthuri15/
-8. Takemura, Shin-ya et al. "Synaptic Circuits and Their Variations within Different Columns in the Visual System of Drosophila." Proceedings of the National Academy of Sciences of the United States of America 112.44 (2015): 13711-13716.
-9.  Kasthuri, Narayanan, et al. "Saturated reconstruction of a volume of neocortex." Cell 162.3 (2015): 648-661.
+8. https://arxiv.org/abs/1611.00421
+9. https://doi.org/10.1101/200675
+10. Takemura, Shin-ya et al. "Synaptic Circuits and Their Variations within Different Columns in the Visual System of Drosophila." Proceedings of the National Academy of Sciences of the United States of America 112.44 (2015): 13711-13716.
+11. Kasthuri, Narayanan, et al. "Saturated reconstruction of a volume of neocortex." Cell 162.3 (2015): 648-661.
