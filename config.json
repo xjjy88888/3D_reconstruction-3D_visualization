@@ -1,9 +1,0 @@
-{
-  "server": "vip.ss.daovpn.top",
-  "server_port": 59015,
-  "local_address":"0.0.0.0",
-  "local_port": 1080,
-  "password": "DaoCloud@02XMEg",
-  "timeout": 600,
-  "method": "aes-256-cfb"
-}
