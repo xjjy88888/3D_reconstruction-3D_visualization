@@ -24,13 +24,11 @@ No installation is required. To install the necessary dependencies, run:
   pip install -r requirements.txt
 ```
 
-## Training
+## Preparing the training data
+
 
 FFN networks can be trained with the `train.py` script, which expects a
 TFRecord file of coordinates at which to sample data from input volumes.
-
-## Preparing the training data
-
 There are two scripts to generate training coordinate files for
 a labeled dataset stored in HDF5 files: `compute_partitions.py` and
 `build_coordinates.py`.
