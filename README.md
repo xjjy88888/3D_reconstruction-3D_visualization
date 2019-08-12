@@ -1,6 +1,6 @@
-This repo is used to do cellular segmentation for 3D reconstruction of tomographic images using FFN by Google.
-Meanwhile, u can make a 3D visualization in your own browser based on WebGL.
-Thanks to google for the code, i put the reference link at bottom.
+This repo is used to do cellular segmentation for 3D reconstruction of tomographic images using FFN by Google.  
+Meanwhile, u can make a 3D visualization in your own browser based on WebGL.  
+Thanks to google for the code, i put the reference link at bottom.  
 
 # Part1: Cellular-Segmentation
     
